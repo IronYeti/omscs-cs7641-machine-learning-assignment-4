@@ -4,6 +4,7 @@ import burlap.assignment4.util.AnalysisAggregator;
 import burlap.assignment4.util.AnalysisRunner;
 import burlap.assignment4.util.BasicRewardFunction;
 import burlap.assignment4.util.BasicTerminalFunction;
+import burlap.assignment4.util.BlackHoleRewardFunction;
 import burlap.assignment4.util.MapPrinter;
 import burlap.oomdp.core.Domain;
 import burlap.oomdp.core.TerminalFunction;
@@ -25,8 +26,8 @@ public class HardGridWorldLauncher {
 	//showValueIterationPolicyMap, showPolicyIterationPolicyMap, and showQLearningPolicyMap will open a GUI
 	//you can use to visualize the policy maps. Consider only having one variable set to true at a time
 	//since the pop-up window does not indicate what algorithm was used to generate the map.
-	private static boolean showValueIterationPolicyMap = true; 
-	private static boolean showPolicyIterationPolicyMap = false;
+	private static boolean showValueIterationPolicyMap = false; 
+	private static boolean showPolicyIterationPolicyMap = true;
 	private static boolean showQLearningPolicyMap = false;
 	
 	private static Integer MAX_ITERATIONS = 100;
@@ -37,13 +38,13 @@ public class HardGridWorldLauncher {
 										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 										{ 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
+										{ 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1},
 										{ 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0},
 										{ 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0},
+										{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
 										{ 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0},
-										{ 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
 										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},};
+										{ 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0},};
 
 //	private static Integer mapLen = map.length-1;
 
@@ -52,14 +53,17 @@ public class HardGridWorldLauncher {
 		int[][] map = MapPrinter.mapToMatrix(userMap);
 		int maxX = map.length-1;
 		int maxY = map[0].length-1;
+		int bhX = 5;
+		int bhY = map[0].length-1-1;
 		// 
 
 		BasicGridWorld gen = new BasicGridWorld(map,maxX,maxY); //0 index map is 11X11
 		Domain domain = gen.generateDomain();
 
-		State initialState = BasicGridWorld.getExampleState(domain);
+		State initialState = BasicGridWorld.getExampleState(domain, 0, maxY);
 
-		RewardFunction rf = new BasicRewardFunction(maxX,maxY); //Goal is at the top right grid
+//		RewardFunction rf = new BasicRewardFunction(maxX,maxY); //Goal is at the top right grid
+		RewardFunction rf = new BlackHoleRewardFunction(maxX,maxY,bhX,bhY); //Goal is at the top right grid
 		TerminalFunction tf = new BasicTerminalFunction(maxX,maxY); //Goal is at the top right grid
 		
 		SimulatedEnvironment env = new SimulatedEnvironment(domain, rf, tf,

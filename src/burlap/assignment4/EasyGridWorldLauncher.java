@@ -15,7 +15,7 @@ import burlap.oomdp.visualizer.Visualizer;
 
 public class EasyGridWorldLauncher {
 	//These are some boolean variables that affect what will actually get executed
-	private static boolean visualizeInitialGridWorld = true; //Loads a GUI with the agent, walls, and goal
+	private static boolean visualizeInitialGridWorld = false; //Loads a GUI with the agent, walls, and goal
 	
 	//runValueIteration, runPolicyIteration, and runQLearning indicate which algorithms will run in the experiment
 	private static boolean runValueIteration = true; 
@@ -32,13 +32,22 @@ public class EasyGridWorldLauncher {
 	private static Integer MAX_ITERATIONS = 100;
 	private static Integer NUM_INTERVALS = 100;
 
+	// This is the original map...
+	//	protected static int[][] userMap = new int[][] { 
+//			{ 0, 0, 0, 0, 0},
+//			{ 0, 1, 1, 1, 0},
+//			{ 0, 1, 1, 1, 0},
+//			{ 1, 0, 1, 1, 0},
+//			{ 0, 0, 0, 0, 0}, };
+
+	// This is my map...
 	protected static int[][] userMap = new int[][] { 
-			{ 0, 0, 0, 0, 0},
-			{ 0, 1, 1, 1, 0},
-			{ 0, 1, 1, 1, 0},
-			{ 1, 0, 1, 1, 0},
-			{ 0, 0, 0, 0, 0}, };
-	
+		{ 0, 0, 0, 0, 0},
+		{ 0, 1, 1, 1, 0},
+		{ 0, 1, 1, 1, 0},
+		{ 0, 1, 0, 0, 0},
+		{ 0, 0, 0, 1, 0}, };
+
 //	private static Integer mapLen = map.length-1;
 
 	public static void main(String[] args) {
@@ -51,7 +60,7 @@ public class EasyGridWorldLauncher {
 		BasicGridWorld gen = new BasicGridWorld(map,maxX,maxY); //0 index map is 11X11
 		Domain domain = gen.generateDomain();
 
-		State initialState = BasicGridWorld.getExampleState(domain);
+		State initialState = BasicGridWorld.getExampleState(domain,0 ,0);
 
 		RewardFunction rf = new BasicRewardFunction(maxX,maxY); //Goal is at the top right grid
 		TerminalFunction tf = new BasicTerminalFunction(maxX,maxY); //Goal is at the top right grid
