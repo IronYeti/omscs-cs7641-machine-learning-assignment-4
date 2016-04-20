@@ -140,11 +140,14 @@ public class AnalysisRunner {
 		for(int numIterations = increment;numIterations<=MAX_ITERATIONS;numIterations+=increment ){
 			long startTime = System.nanoTime();
 
+//			QLearning(Domain domain, double gamma, HashableStateFactory hashingFactory,
+//					double qInit, double learningRate)
 			agent = new QLearning(
 				domain,
-				0.99,
+				0.9,   // gamma  (was 0.99)
 				hashingFactory,
-				0.99, 0.99);
+				0.2,	// qInit (was 0.99)
+				0.2);   // learningRate (was 0.99)
 			
 			for (int i = 0; i < numIterations; i++) {
 				ea = agent.runLearningEpisode(env);
