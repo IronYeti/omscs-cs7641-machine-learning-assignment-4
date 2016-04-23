@@ -151,13 +151,14 @@ public class ValueIteration extends DynamicProgramming implements Planner {
 				double v = this.value(sh);
 				double maxQ = this.performBellmanUpdateOn(sh);
 				delta = Math.max(Math.abs(maxQ - v), delta);
-				
 			}
 			
 			if(delta < this.maxDelta){
+				System.out.println("...VI approximated well enough (maxDelta of " + this.maxDelta + "); stop iterating");
 				break; //approximated well enough; stop iterating
 			}
 			
+		System.out.println("i / delta = " + i + " / " + delta);
 		}
 		
 		DPrint.cl(this.debugCode, "Passes: " + i);

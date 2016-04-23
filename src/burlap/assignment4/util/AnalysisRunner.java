@@ -55,7 +55,7 @@ public class AnalysisRunner {
 					tf,
 					0.99,
 					hashingFactory,
-					-1, numIterations); //Added a very high delta number in order to guarantee that value iteration occurs the max number of iterations
+					0.1, numIterations); //Added a very high delta number in order to guarantee that value iteration occurs the max number of iterations
 										   //for comparison with the other algorithms.
 	
 			// run planning from our initial state
@@ -194,9 +194,10 @@ public class AnalysisRunner {
 		double myRewards = 0;
 
 		//sum all rewards
-		for (int i = 0; i<ea.rewardSequence.size(); i++) {
+		for (int i = 0; i < ea.rewardSequence.size(); i++) {
 			myRewards += ea.rewardSequence.get(i);
 		}
+		System.out.println("pre-reward report = " + myRewards);
 		return myRewards;
 	}
 	
