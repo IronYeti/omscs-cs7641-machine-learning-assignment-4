@@ -12,12 +12,16 @@ public class BlackHoleRewardFunction implements RewardFunction {
 	int goalY;
 	int bhX;
 	int bhY;
+	int bh2X;
+	int bh2Y;
 	
-	public BlackHoleRewardFunction(int goalX, int goalY, int bhX, int bhY) {
+	public BlackHoleRewardFunction(int goalX, int goalY, int bhX, int bhY, int bh2X, int bh2Y) {
 		this.goalX = goalX;
 		this.goalY = goalY;
 		this.bhX = bhX;
 		this.bhY = bhY;
+		this.bh2X = bh2X;
+		this.bh2Y = bh2Y;
 	}
 
 	@Override
@@ -34,8 +38,20 @@ public class BlackHoleRewardFunction implements RewardFunction {
 		}
 		// are they at the black hole?
 		if (ax == this.bhX && ay == this.bhY) {
-			return -1000.;
+			return -500.;
 		}
+		// are they at the black hole?
+		if (ax == this.bh2X && ay == this.bh2Y) {
+			return -500.;
+		}
+//		// are they at bonus location 1?
+//		if (ax == 0 && ay == 10) {
+//			return 50.;
+//		}
+//		// are they at bonus location 2?
+//		if (ax == this.r1X && ay == this.r1Y) {
+//			return 100.;
+//		}
 
 		return -1;
 	}

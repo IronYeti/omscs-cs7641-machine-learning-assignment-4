@@ -39,7 +39,7 @@ public class HardGridWorldLauncher {
 										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 										{ 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
 										{ 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1},
-										{ 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 										{ 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0},
 										{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
 										{ 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0},
@@ -55,6 +55,8 @@ public class HardGridWorldLauncher {
 		int maxY = map[0].length-1;
 		int bhX = 5;
 		int bhY = map[0].length-1-1;
+		int bh2X = 5;
+		int bh2Y = 5;
 		// 
 
 		BasicGridWorld gen = new BasicGridWorld(map,maxX,maxY); //0 index map is 11X11
@@ -63,7 +65,7 @@ public class HardGridWorldLauncher {
 		State initialState = BasicGridWorld.getExampleState(domain, 0, maxY);
 
 //		RewardFunction rf = new BasicRewardFunction(maxX,maxY); //Goal is at the top right grid
-		RewardFunction rf = new BlackHoleRewardFunction(maxX,maxY,bhX,bhY); 
+		RewardFunction rf = new BlackHoleRewardFunction(maxX,maxY,bhX,bhY,bh2X,bh2Y); 
 		TerminalFunction tf = new BasicTerminalFunction(maxX,maxY); //Goal is at the top right grid
 		
 		SimulatedEnvironment env = new SimulatedEnvironment(domain, rf, tf,

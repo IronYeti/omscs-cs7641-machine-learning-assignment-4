@@ -197,7 +197,7 @@ public class AnalysisRunner {
 		for (int i = 0; i < ea.rewardSequence.size(); i++) {
 			myRewards += ea.rewardSequence.get(i);
 		}
-		System.out.println("pre-reward report = " + myRewards);
+//		System.out.println("pre-reward report = " + myRewards);
 		return myRewards;
 	}
 	
