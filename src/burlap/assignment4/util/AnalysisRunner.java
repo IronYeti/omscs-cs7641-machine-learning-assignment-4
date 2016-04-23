@@ -2,6 +2,7 @@ package burlap.assignment4.util;
 
 import burlap.assignment4.BasicGridWorld;
 import burlap.behavior.policy.Policy;
+//import burlap.behavior.learningrate.ExponentialDecayLR;
 import burlap.behavior.singleagent.EpisodeAnalysis;
 import burlap.behavior.singleagent.auxiliary.StateReachability;
 import burlap.behavior.singleagent.auxiliary.valuefunctionvis.ValueFunctionVisualizerGUI;
@@ -146,8 +147,8 @@ public class AnalysisRunner {
 				domain,
 				0.9,   // gamma  (was 0.99)
 				hashingFactory,
-				0.2,	// qInit (was 0.99)
-				0.2);   // learningRate (was 0.99)
+				0.01,	// qInit (was 0.99)
+				0.9);   // learningRate (was 0.99)
 			
 			for (int i = 0; i < numIterations; i++) {
 				ea = agent.runLearningEpisode(env);
@@ -155,6 +156,10 @@ public class AnalysisRunner {
 			}
 			agent.initializeForPlanning(rf, tf, 1);
 			p = agent.planFromState(initialState);
+
+//			LearningRate lr = new ExponentialDecayLR();
+//			setLearningRateFunction(lr);
+			
 			AnalysisAggregator.addQLearningReward(calcRewardInEpisode(ea));
 			AnalysisAggregator.addMillisecondsToFinishQLearning((int) (System.nanoTime()-startTime)/1000000);
 			AnalysisAggregator.addStepsToFinishQLearning(ea.numTimeSteps());
