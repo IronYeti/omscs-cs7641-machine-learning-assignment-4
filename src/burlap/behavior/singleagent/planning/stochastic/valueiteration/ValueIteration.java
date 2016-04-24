@@ -158,7 +158,7 @@ public class ValueIteration extends DynamicProgramming implements Planner {
 				break; //approximated well enough; stop iterating
 			}
 			
-		System.out.println("i / delta = " + i + " / " + delta);
+//		System.out.println("i / delta = " + i + " / " + delta);
 		}
 		
 		DPrint.cl(this.debugCode, "Passes: " + i);

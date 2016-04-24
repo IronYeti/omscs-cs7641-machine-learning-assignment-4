@@ -15,7 +15,7 @@ import burlap.oomdp.visualizer.Visualizer;
 
 public class EasyGridWorldLauncher {
 	//These are some boolean variables that affect what will actually get executed
-	private static boolean visualizeInitialGridWorld = true; //Loads a GUI with the agent, walls, and goal
+	private static boolean visualizeInitialGridWorld = false; //Loads a GUI with the agent, walls, and goal
 	
 	//runValueIteration, runPolicyIteration, and runQLearning indicate which algorithms will run in the experiment
 	private static boolean runValueIteration = false; 
@@ -29,8 +29,8 @@ public class EasyGridWorldLauncher {
 	private static boolean showPolicyIterationPolicyMap = false;
 	private static boolean showQLearningPolicyMap = true;
 	
-	private static Integer MAX_ITERATIONS = 100;
-	private static Integer NUM_INTERVALS = 100;
+	private static Integer MAX_ITERATIONS = 300;
+	private static Integer NUM_INTERVALS = 300;
 
 	// This is the original map...
 	//	protected static int[][] userMap = new int[][] { 
@@ -65,8 +65,7 @@ public class EasyGridWorldLauncher {
 		RewardFunction rf = new BasicRewardFunction(maxX,maxY); //Goal is at the top right grid
 		TerminalFunction tf = new BasicTerminalFunction(maxX,maxY); //Goal is at the top right grid
 
-		SimulatedEnvironment env = new SimulatedEnvironment(domain, rf, tf,
-				initialState);
+		SimulatedEnvironment env = new SimulatedEnvironment(domain, rf, tf, initialState);
 		//Print the map that is being analyzed
 		System.out.println("/////Easy Grid World Analysis/////\n");
 		MapPrinter.printMap(MapPrinter.matrixToMap(map));

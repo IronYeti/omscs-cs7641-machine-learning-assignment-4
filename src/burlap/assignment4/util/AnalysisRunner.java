@@ -145,10 +145,10 @@ public class AnalysisRunner {
 //					double qInit, double learningRate)
 			agent = new QLearning(
 				domain,
-				0.9,   // gamma  (was 0.99)
+				0.99,   // gamma  (was 0.99)
 				hashingFactory,
-				0.01,	// qInit (was 0.99)
-				0.9);   // learningRate (was 0.99)
+				0.99,	// qInit (was 0.99)
+				0.1);   // learningRate (was 0.99)
 			
 			for (int i = 0; i < numIterations; i++) {
 				ea = agent.runLearningEpisode(env);

@@ -38,7 +38,7 @@ public class BlackHoleRewardFunction implements RewardFunction {
 		}
 		// are they at the black hole?
 		if (ax == this.bhX && ay == this.bhY) {
-			return -500.;
+			return -1000.;
 		}
 		// are they at the black hole?
 		if (ax == this.bh2X && ay == this.bh2Y) {
